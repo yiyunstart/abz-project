@@ -5,11 +5,22 @@
 
 ### 使用nacos作为注册中心，配置中心
 - nacos官网地址
+
 https://nacos.io/zh-cn/index.html
+
 - nacos部署地址
+
 http://172.81.203.33:8848/nacos
-账号：nacos/nacos
+
+- 账号：
+
+nacos/nacos
 
 ### 集成分布式事务框架seata
 http://seata.io
+
+### 集成统一日志管理系统 elk
+
+https://www.elastic.co/cn/
+
 
