@@ -38,4 +38,20 @@ Query OK, 0 rows affected (0.00 sec)
 2020-08-27 16:42:36.724  INFO 6983 --- [_RMROLE_1_11_16] Branch Rollbacking: 172.17.0.5:8091:42287542946516992 42287545605705728 jdbc:mysql://172.81.203.33:3306/db_seata
 2020-08-27 16:42:36.903  INFO 6983 --- [_RMROLE_1_11_16] 172.17.0.5:8091:42287542946516992-42287545605705728 rollback failed since XAER_RMFAIL: The command cannot be executed when global transaction is in the  IDLE state
 
-正在执行中的事务被其他事务干扰了
+正在执行中的事务被其他事务干扰了，是spring的事务干扰了，
+
+增加noRollbackFor 配置，不让spring事务管理参与回滚操作
+```
+@Transactional(noRollbackFor=RuntimeException.class)
+    public void reduce(String userId, int money) {
+        String xid = RootContext.getXID();
+
+        LOGGER.info("reduce account balance in transaction: " + xid);
+        jdbcTemplate.update("update account_tbl set money = money - ? where user_id = ?", new Object[] {money, userId});
+        int balance = jdbcTemplate.queryForObject("select money from account_tbl where user_id = ?", new Object[] {userId}, Integer.class);
+        LOGGER.info("balance after transaction: " + balance);
+        if (balance < 0) {
+            throw new RuntimeException("Not Enough Money ...");
+        }
+    }
+```
