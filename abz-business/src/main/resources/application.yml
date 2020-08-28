@@ -7,3 +7,11 @@ server:
 #                dashboard: localhost:8858
 #            eager: true
 #            http-method-specify: true
+auth:
+    url: http://localhost:1000
+spring:
+    security:
+        oauth2:
+            resourceserver:
+                jwt:
+                    jwk-set-uri: ${auth.url}/.well-known/jwks.json
