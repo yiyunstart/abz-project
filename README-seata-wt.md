@@ -38,4 +38,4 @@ Query OK, 0 rows affected (0.00 sec)
 2020-08-27 16:42:36.724  INFO 6983 --- [_RMROLE_1_11_16] Branch Rollbacking: 172.17.0.5:8091:42287542946516992 42287545605705728 jdbc:mysql://172.81.203.33:3306/db_seata
 2020-08-27 16:42:36.903  INFO 6983 --- [_RMROLE_1_11_16] 172.17.0.5:8091:42287542946516992-42287545605705728 rollback failed since XAER_RMFAIL: The command cannot be executed when global transaction is in the  IDLE state
 
-叠加了spring事务注解
+正在执行中的事务被其他事务干扰了
