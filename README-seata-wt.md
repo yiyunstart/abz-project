@@ -29,3 +29,13 @@ mysql> XA RECOVER;
 mysql> xa rollback '172.17.0.5:8091:41940156638318592' , '-41940157280047104' , 9752;
 Query OK, 0 rows affected (0.00 sec)
 
+
+
+# XAER_RMFAIL: The command cannot be executed when global transaction is in the  IDLE state
+
+2020-08-27 16:42:35.807  INFO 6983 --- [_RMROLE_1_10_16] Branch Rollbacked result: PhaseTwo_RollbackFailed_Retryable
+2020-08-27 16:42:36.724  INFO 6983 --- [_RMROLE_1_11_16] rm handle branch rollback process:xid=172.17.0.5:8091:42287542946516992,branchId=42287545605705728,branchType=XA,resourceId=jdbc:mysql://172.81.203.33:3306/db_seata,applicationData=null
+2020-08-27 16:42:36.724  INFO 6983 --- [_RMROLE_1_11_16] Branch Rollbacking: 172.17.0.5:8091:42287542946516992 42287545605705728 jdbc:mysql://172.81.203.33:3306/db_seata
+2020-08-27 16:42:36.903  INFO 6983 --- [_RMROLE_1_11_16] 172.17.0.5:8091:42287542946516992-42287545605705728 rollback failed since XAER_RMFAIL: The command cannot be executed when global transaction is in the  IDLE state
+
+叠加了spring事务注解

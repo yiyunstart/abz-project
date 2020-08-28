@@ -1,2 +1,9 @@
 server:
     port: 8084
+#spring:
+#    cloud:
+#        sentinel:
+#            transport:
+#                dashboard: localhost:8858
+#            eager: true
+#            http-method-specify: true
