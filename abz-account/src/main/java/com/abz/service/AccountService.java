@@ -24,14 +24,12 @@ public class AccountService {
     @Transactional(noRollbackFor=RuntimeException.class)
     public void reduce(String userId, int money) {
         String xid = RootContext.getXID();
-        Object savePoint = TransactionAspectSupport.currentTransactionStatus().createSavepoint();
 
         LOGGER.info("reduce account balance in transaction: " + xid);
         jdbcTemplate.update("update account_tbl set money = money - ? where user_id = ?", new Object[] {money, userId});
         int balance = jdbcTemplate.queryForObject("select money from account_tbl where user_id = ?", new Object[] {userId}, Integer.class);
         LOGGER.info("balance after transaction: " + balance);
         if (balance < 0) {
-            TransactionAspectSupport.currentTransactionStatus().rollbackToSavepoint(savePoint);
             throw new RuntimeException("Not Enough Money ...");
         }
     }
